@@ -70,14 +70,14 @@ def launch(liste, output)
       end
 
       if File.exist?("#{output}/#{show}.txt") == false
-        f = File.new("#{output}/#{show}.txt", "w")
+        fsub = File.new("#{output}/#{show}.txt", "w")
         open( subtitle ).read.split("\n").each do |line|
           if line.include?("<span") == true
             node = Hpricot.parse( line ).search("//span").first.inner_html
-            f << node +"\n"
+            fsub << node +"\n"
           end
         end
-        f.close
+        fsub.close
       end
 
     rescue
