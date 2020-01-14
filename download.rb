@@ -55,19 +55,18 @@ def launch(liste, output)
       puts "#{show}"
       puts "#{id}"
 
-      puts "get_id"
+      puts "[x] get_id"
       json = get_json(id)
-      puts "get_subtitle"
+      puts "[x] get_subtitle"
       subtitle = get_subtitle(json)
-      puts "get_m3u8"
+      puts "[x] get_m3u8"
       m3u8 = get_m3u8(json)
-      puts "get_mkv"
+      puts "[x] get_mkv"
       mkv = open(m3u8).read.split("\n").last
 
-      json_url = "https://player.webservices.francetelevisions.fr/v1/videos/"+id+"?country_code=FR&w=720&h=405&version=5.16.1&domain=www.france.tv&device_type=desktop&browser=chrome&browser_version=75&os=macos&os_version=10_14_1&gmt=%2B1"
 
       if File.exist?("#{output}/#{show}.mp4") == false
-        %x[ffmpeg -i \"#{mkv}\" -c copy data/#{show}.mp4 </dev/null]
+        %x[ffmpeg -i \"#{mkv}\" -c copy #{output}/#{show}.mp4 </dev/null]
       end
 
       if File.exist?("#{output}/#{show}.txt") == false
